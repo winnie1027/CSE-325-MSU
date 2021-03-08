@@ -1,0 +1,20 @@
+#!/bin/tcsh -f
+#
+# Winnie Yang
+#
+# CSE 325 Project 2
+#
+# The C shell script which produces report #1
+#
+# Read data from the census file.
+# Return a report about the census units within a specified county.
+# The second command-line token is an identifier for the specified county.
+
+#print census data intro line for argument 1
+echo 'Census data for' $argv[1]':'
+
+# To print out headers
+cat project02.headers
+
+# Search file for argument, sorted by ascending population then alphabetically
+grep "| $argv[1] " project02.data | sort -t '|' -k3,3n -k1,1

@@ -1,0 +1,27 @@
+#!/bin/tcsh -f
+#
+# Winnie Yang
+#
+# CSE 325 Project 2
+#
+# The C shell script which produces report #2
+#
+# Will produces a series of individual reports about the census units in a list
+# of specified counties.
+# The second and each subsequent command-line token is an identifier for a
+# specified county.
+
+# for each county name in data
+foreach fname ($argv[*]:q)
+  echo 'Census Data for' $fname 'county:'
+
+# print report headers
+  cat project02.headers
+
+# search file for argument, sort it in ascending population then alphabetically
+# based on names
+  grep " | $fname " project02.data |sort -t'|' -k3,3n -k1,1
+
+  echo
+end
+

@@ -1,0 +1,27 @@
+#!/bin/tcsh -f
+#
+# Winnie Yang
+#
+# CSE 325 Project 2
+#
+# The C shell script which produces Report #3
+#
+# Will produce a report about the N census units with the largest population
+# Takes N for number, followed by space then A for All, T for Township, and C for City
+
+# print out report headers
+cat project02.headers
+
+if ($argv[2] == "A") then
+  set subset = "Township and City"
+  echo 'Top' $argv[1] 'highest population by' $subset':'
+  cat project02.data | sort -t'|' -k3,3nr -k1,1 | head -$argv[1]
+else if ($argv[2] == "T") then
+  set subset = "Township"
+  echo 'Top' $argv[1] 'highest population by' $subset':'
+  grep -i $subset project02.data | sort -t'|' -k3,3nr -k1,1 | head -$argv[1]
+else if ($argv[2] == "C") then
+  set subset = "City"
+  echo 'Top' $argv[1] 'highest population by' $subset':'
+  grep -i $subset project02.data | sort -t'|' -k3,3nr -k1,1 | head -$argv[1]
+endif
